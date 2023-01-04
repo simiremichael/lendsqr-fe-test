@@ -16,6 +16,11 @@ import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import Paginate from '../components/Pagination';
 import SideBar from '../components/SideBar';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { Link } from 'react-router-dom';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+
 
 const StyledBox = styled(Box)`
 width: auto;
@@ -236,6 +241,61 @@ border: 1px solid #39CDCC;
 color: #FFFFFF;
 margin-left: 15px;
 `
+const StyledLink = styled(Link)`
+text-decoration: none;
+`
+const ViewDetailsContainer = styled.div`
+background: #ffffff;
+position: absolute;
+z-index: 10001;
+margin-left: -120px;
+margin-top: 50px;
+border: 1px solid rgba(84, 95, 125, 0.04);
+box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+border-radius: 4px;
+padding: 0 5px;
+`
+const ViewBtn = styled.button`
+width: auto;
+padding: 0;
+border: none;
+background: transparent;
+margin-right: 15px;
+cursor: pointer;
+`
+const ViewDetails = styled.p`
+font-family: 'Work Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+color: #545F7D;
+cursor: pointer;
+display: flex;
+align-items: center;
+`
+const Blacklist = styled.p`
+font-family: 'Work Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+color: #545F7D;
+display: flex;
+align-items: center;
+cursor: pointer;
+`
+const Activate = styled.p`
+font-family: 'Work Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+color: #545F7D;
+display: flex;
+align-items: center;
+cursor: pointer;
+`
 const SideBarToggleContainer = styled.div`
 @media screen and (min-width: 841px) {
   display: none;
@@ -252,7 +312,8 @@ function Dashboard() {
   const [filterToggle, setFilterToggle] = useState(false)
   const [sidebar, setSidebar] = useState(false);
   const { data, isFetching, isLoading } = useGetUsersQuery();
-  
+  const [view, setView] = useState<any>([]);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -264,8 +325,20 @@ function Dashboard() {
   const {user} = useAppSelector(selectCurrentUser);
   const usersPerPage = 10
   const [pageNumber, setPageNumber] = useState({showing: usersPerPage, pageCount: 0, from: 0, to: usersPerPage});
-  // const from = Number(pageNumber) * usersPerPage
-  // const to = from + usersPerPage
+  
+  const handleView = (userId: any) => {
+    const showUser = view.slice();
+    
+    const  index = showUser.indexOf(userId);
+    if(index >= 0) {
+      showUser.splice(index, 1);
+      setView(showUser);
+    } else {
+      showUser.push(userId);
+      setView(showUser);
+    }
+    }
+
   {/* @ts-ignore:next-line */}  
   const displayUsers = user?.slice(pageNumber.from, pageNumber.to)
   .map((result: any) =>  { 
@@ -277,6 +350,15 @@ function Dashboard() {
   <Td>{result?.phoneNumber}</Td>
   <Td>{result?.createdAt}</Td>
   <Td><MoreVertOutlinedIcon sx={{cursor: 'pointer'}} /></Td>
+  {view.includes(result?.id) && (
+  <Td><ViewDetailsContainer>
+    <StyledLink to={`/userDetails/${result.id}`}>
+    <ViewDetails><VisibilityOutlinedIcon sx={{color: '#545F7D',fontSize: '18px', marginRight: '5px'}}/> View Details</ViewDetails>
+    </StyledLink>
+    <Blacklist><ManageAccountsOutlinedIcon sx={{color: '#545F7D',fontSize: '18px', marginRight: '5px'}} /> Blacklist User</Blacklist>
+    <Activate><PersonAddAltOutlinedIcon sx={{color: '#545F7D',fontSize: '18px', marginRight: '5px'}} /> Activate User</Activate>
+  </ViewDetailsContainer></Td>
+  )}
   </Tr>
     );
   });
