@@ -386,8 +386,7 @@ setFilterToggle(!filterToggle);
         )}
         <MaxWidthSideBarToggleContainer item lg={2} md={2} sm={3} xs={4}>
          <SideBar />
-        </MaxWidthSideBarToggleContainer>
-        {/* @ts-ignore:next-line */}  
+        </MaxWidthSideBarToggleContainer> 
         <Grid item lg={window.innerWidth >= 841 || sidebar ? 10 : 12} md={window.innerWidth >= 841 || sidebar ? 10 : 12} sm={window.innerWidth >= 841 || sidebar ? 9 : 12} xs={window.innerWidth >= 841 || sidebar ? 8 : 12}>
           <MainContainer>
             <MainInnerContainer>

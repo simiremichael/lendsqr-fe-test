@@ -235,10 +235,21 @@ border: 1px solid #39CDCC;
 color: #FFFFFF;
 margin-left: 15px;
 `
+const SideBarToggleContainer = styled.div`
+@media screen and (min-width: 841px) {
+  display: none;
+}
+`
+const MaxWidthSideBarToggleContainer = styled(Grid)`
+@media screen and (max-width: 840px) {
+  display: none;
+}
+`
 
 function Dashboard() {
 
   const [filterToggle, setFilterToggle] = useState(false)
+  const [sidebar, setSidebar] = useState(false);
   const { data, isFetching, isLoading } = useGetUsersQuery();
   
   const dispatch = useAppDispatch();
@@ -280,10 +291,15 @@ setFilterToggle(!filterToggle);
     <NavBar />
     <BodyContainer>
       <Grid container spacing={2}>
+      {sidebar && (
         <Grid item lg={2} md={2} sm={3} xs={4}>
          <SideBar />
         </Grid>
-        <Grid item lg={10} md={10} sm={9} xs={8}>
+        )}
+        <MaxWidthSideBarToggleContainer item lg={2} md={2} sm={3} xs={4}>
+         <SideBar />
+        </MaxWidthSideBarToggleContainer> 
+        <Grid item lg={window.innerWidth >= 841 || sidebar ? 10 : 12} md={window.innerWidth >= 841 || sidebar ? 10 : 12} sm={window.innerWidth >= 841 || sidebar ? 9 : 12} xs={window.innerWidth >= 841 || sidebar ? 8 : 12}>
           <MainContainer>
             <MainInnerContainer>
             <MainTitle>Dashboard</MainTitle>
