@@ -9,6 +9,7 @@ import { useGetUserQuery } from '../api/api'
 import { selectCurrentUserDetails, setUserDetails } from '../features/userDetailsSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 const StyledBox = styled(Box)`
 width: auto;
@@ -260,6 +261,9 @@ function UserDetailsPage() {
   return (
     <StyledBox>
       <NavBar />
+      <SideBarToggleContainer>
+    <MenuOutlinedIcon sx={{cursor: 'pointer', marginBottom: '15px'}} onClick={() => setSidebar(!sidebar)}/>
+    </SideBarToggleContainer>
       <BodyContainer>
       <Grid container spacing={2}>
       {sidebar && (

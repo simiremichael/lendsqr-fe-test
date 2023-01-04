@@ -15,6 +15,7 @@ import { selectCurrentUser, setUsers } from '../features/userSlice';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import Paginate from '../components/Pagination';
 import SideBar from '../components/SideBar';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 const StyledBox = styled(Box)`
 width: auto;
@@ -289,6 +290,9 @@ setFilterToggle(!filterToggle);
   return (
     <StyledBox>
     <NavBar />
+    <SideBarToggleContainer>
+    <MenuOutlinedIcon sx={{cursor: 'pointer', marginBottom: '15px'}} onClick={() => setSidebar(!sidebar)}/>
+    </SideBarToggleContainer>
     <BodyContainer>
       <Grid container spacing={2}>
       {sidebar && (
