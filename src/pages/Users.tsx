@@ -19,6 +19,7 @@ import SideBar from '../components/SideBar';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 const StyledBox = styled(Box)`
 width: auto;
@@ -297,10 +298,21 @@ display: flex;
 align-items: center;
 cursor: pointer;
 `
+const SideBarToggleContainer = styled.div`
+@media screen and (min-width: 841px) {
+  display: none;
+}
+`
+const MaxWidthSideBarToggleContainer = styled(Grid)`
+@media screen and (max-width: 840px) {
+  display: none;
+}
+`
 
 function Users() {
 
   const [filterToggle, setFilterToggle] = useState(false)
+  const [sidebar, setSidebar] = useState(false);
   const { data, isFetching, isLoading } = useGetUsersQuery();
   const [view, setView] = useState<any>([]);
   const dispatch = useAppDispatch();
@@ -362,12 +374,21 @@ setFilterToggle(!filterToggle);
   return (
     <StyledBox>
     <NavBar />
+    <SideBarToggleContainer>
+    <MenuOutlinedIcon sx={{cursor: 'pointer', marginBottom: '15px'}} onClick={() => setSidebar(!sidebar)}/>
+    </SideBarToggleContainer>
     <BodyContainer>
       <Grid container spacing={2}>
+        {sidebar && (
         <Grid item lg={2} md={2} sm={3} xs={4}>
          <SideBar />
         </Grid>
-        <Grid item lg={10} md={10} sm={9} xs={8}>
+        )}
+        <MaxWidthSideBarToggleContainer item lg={2} md={2} sm={3} xs={4}>
+         <SideBar />
+        </MaxWidthSideBarToggleContainer>
+        {/* @ts-ignore:next-line */}  
+        <Grid item lg={innerWidth >= 841 || sidebar ? 10 : 12} md={innerWidth >= 841 || sidebar ? 10 : 12} sm={innerWidth >= 841 || sidebar ? 9 : 12} xs={innerWidth >= 841 || sidebar ? 8 : 12}>
           <MainContainer>
             <MainInnerContainer>
             <MainTitle>Users</MainTitle>
