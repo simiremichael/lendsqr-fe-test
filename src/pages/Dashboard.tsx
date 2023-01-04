@@ -349,7 +349,7 @@ function Dashboard() {
   <Td>{result?.email}</Td>        
   <Td>{result?.phoneNumber}</Td>
   <Td>{result?.createdAt}</Td>
-  <Td><MoreVertOutlinedIcon sx={{cursor: 'pointer'}} /></Td>
+  <Td><ViewBtn onClick={() => handleView(result?.id)}><MoreVertOutlinedIcon /></ViewBtn></Td>
   {view.includes(result?.id) && (
   <Td><ViewDetailsContainer>
     <StyledLink to={`/userDetails/${result.id}`}>
