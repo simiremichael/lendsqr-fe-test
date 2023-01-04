@@ -5,6 +5,7 @@ import { Box } from '@mui/system';
 import { FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useNavigate } from 'react-router-dom';
 
 const StyledBox = styled(Box)`
 height: 100%;
@@ -100,7 +101,7 @@ function Login() {
   }
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
- 
+  const navigate = useNavigate();
   return (
     <StyledBox>
      <StyledContainer>
@@ -158,7 +159,7 @@ function Login() {
           </Grid>
           </Form>
           <Link>FORGOT PASSWORD?</Link>
-          <LoginBtn>LOG IN</LoginBtn>
+          <LoginBtn onClick={() => navigate('/users')}>LOG IN</LoginBtn>
           </LoginContainer>
           </Grid>
         </Grid>

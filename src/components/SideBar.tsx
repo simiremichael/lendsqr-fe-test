@@ -83,7 +83,7 @@ function SideBar() {
   return (
     <SideBarContainer>
     <SwitchBtn><BusinessCenterOutlinedIcon sx={{marginRight: '5px', fontSize: '15px'}} />Switch organisation<ArrowDropDownIcon /></SwitchBtn>
-  <NavItems><HomeOutlinedIcon sx={{marginRight: '5px', fontSize: '18px'}} />DashBoard</NavItems>
+  <NavItems><StyledNavLink to='/dashboard'><HomeOutlinedIcon sx={{marginRight: '5px', fontSize: '18px'}} />DashBoard</StyledNavLink></NavItems>
    <Customer>CUSTOMERS</Customer>
    <NavItems><StyledNavLink to='/users'><PeopleOutlinedIcon sx={{marginRight: '5px', fontSize: '18px'}} />Users</StyledNavLink></NavItems>
    <NavItems><StyledNavLink to=''><GroupsOutlinedIcon sx={{marginRight: '5px', fontSize: '18px'}} />Guarantors</StyledNavLink></NavItems>

@@ -286,7 +286,7 @@ setFilterToggle(!filterToggle);
         <Grid item lg={10} md={10} sm={9} xs={8}>
           <MainContainer>
             <MainInnerContainer>
-            <MainTitle>Users</MainTitle>
+            <MainTitle>Dashboard</MainTitle>
            <Grid container spacing={2}>
             <Grid item lg={3} md={3} sm={6} xs={12}>
              <Card>

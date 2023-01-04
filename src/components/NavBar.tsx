@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from '@emotion/styled';
 import { Box } from '@mui/system';
 import { IconButton, Menu, Tooltip, Avatar } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { useNavigate } from 'react-router-dom';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 const StyledBox = styled(Box)`
 width: 100%;
@@ -16,6 +18,7 @@ height: 100px;
 justify-content: space-between;
 align-items: center;
 width: auto;
+cursor: pointer;
 `
 const LogoContainer = styled.div`
 height: 100%;
@@ -97,26 +100,45 @@ const MobileProfileContainer = styled.div`
 
 function NavBar() {
 
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [anchorElNavMini, setAnchorElNavMini] = useState<null | HTMLElement>(null);
+  const [anchorElUserMini, setAnchorElUserMini] = useState<null | HTMLElement>(null);
   
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+  const handleOpenNavMenuMini = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNavMini(event.currentTarget);
+  };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
+  const handleOpenUserMenuMini = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUserMini(event.currentTarget);
+  };
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  
+  const handleCloseNavMenuMini = () => {
+    setAnchorElNav(null);
+  };
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleCloseUserMenuMini = () => {
+    setAnchorElUserMini(null);
+  };
+
+  const navigate = useNavigate();   
+
   return (
     <StyledBox>
         <NavBarContainer>
-        <LogoContainer>
+        <LogoContainer onClick={() => navigate('/dashboard')}>
          <Logo src='../images/Union.svg' />
          <Logo src='../images/lendsqr.svg' />
         </LogoContainer>
@@ -149,6 +171,7 @@ function NavBar() {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
+             <LogoutOutlinedIcon sx={{marginLeft: '5px', cursor: 'pointer'}} onClick={() => navigate('/')} />
         </Menu>
         </Box>
         <ProfileName style={{ marginLeft: '10px' }}>Adedeji<ArrowDropDownIcon /></ProfileName>
@@ -156,14 +179,14 @@ function NavBar() {
         <MobileProfileContainer>
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <IconButton onClick={handleOpenUserMenuMini} sx={{ p: 0 }}>
               <Avatar  />
             </IconButton>
           </Tooltip>
           <Menu
             sx={{ mt: '45px', }}
             id="menu-appbar"
-            anchorEl={anchorElUser}
+            anchorEl={anchorElUserMini}
             anchorOrigin={{
               vertical: 'top',
               horizontal: 'right',
@@ -173,13 +196,14 @@ function NavBar() {
               vertical: 'top',
               horizontal: 'right',
             }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
+            open={Boolean(anchorElUserMini)}
+            onClose={handleCloseUserMenuMini}
           >
           <Docs style={{marginBottom: '10px', marginLeft: '5px'}}>Docs</Docs>
           <NotificationsNoneIcon sx={{color: '#213F7D', cursor: 'pointer'}} />
           <ProfileName style={{marginTop: 0, marginLeft: '5px'}}>Adedeji<ArrowDropDownIcon /></ProfileName>
-          </Menu>
+          <LogoutOutlinedIcon sx={{marginLeft: '5px', cursor: 'pointer'}} onClick={() => navigate('/')} />
+           </Menu>
         </Box>
         </MobileProfileContainer>
       </NavBarContainer>
