@@ -388,7 +388,7 @@ setFilterToggle(!filterToggle);
          <SideBar />
         </MaxWidthSideBarToggleContainer>
         {/* @ts-ignore:next-line */}  
-        <Grid item lg={innerWidth >= 841 || sidebar ? 10 : 12} md={innerWidth >= 841 || sidebar ? 10 : 12} sm={innerWidth >= 841 || sidebar ? 9 : 12} xs={innerWidth >= 841 || sidebar ? 8 : 12}>
+        <Grid item lg={window.innerWidth >= 841 || sidebar ? 10 : 12} md={window.innerWidth >= 841 || sidebar ? 10 : 12} sm={window.innerWidth >= 841 || sidebar ? 9 : 12} xs={window.innerWidth >= 841 || sidebar ? 8 : 12}>
           <MainContainer>
             <MainInnerContainer>
             <MainTitle>Users</MainTitle>
