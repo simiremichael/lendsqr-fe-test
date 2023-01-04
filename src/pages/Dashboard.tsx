@@ -138,6 +138,7 @@ font-weight: 400;
 font-size: 14px;
 line-height: 16px;
 color: #545F7D;
+position: relative;
 `
 const PaginationContainer = styled.div`
 background: inherit; 
