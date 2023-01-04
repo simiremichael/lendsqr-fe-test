@@ -14,5 +14,5 @@ This project is built with React, typescript, react-router and Rtk query for sta
 Material ui and Emotion is used for styling.
 
 i prefer styling this way, each components with it styling. it makes it very easy to find bugs.
-
+login: user@gmail.com and passord: 123
 
